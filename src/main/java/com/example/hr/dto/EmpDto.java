@@ -11,6 +11,9 @@ public class EmpDto {
 	private String email;
 	private String empNo;
 	private LocalDate hireDate;
+	private String phone;
+	private int salary;
+	private float bonus;
 	
 	// entYn : 퇴직여부(N: 재직 / Y: 퇴사)
 	private String entYn;

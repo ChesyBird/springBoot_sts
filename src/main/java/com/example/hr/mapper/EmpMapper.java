@@ -20,4 +20,7 @@ public interface EmpMapper {
 	
 	public List<EmpDto> selectByCond();
 
+	@Select("select * from emp where emp_id=#{id}")
+	public EmpDto selectById(String id);
+	
 }

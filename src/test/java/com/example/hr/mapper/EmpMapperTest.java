@@ -43,4 +43,11 @@ public class EmpMapperTest {
 		System.out.println(list);
 	}
 	
+	@Test
+	public void selectById() {
+		EmpDto emp = mapper.selectById("200");
+		System.out.println(emp);
+		
+	}
+	
 }

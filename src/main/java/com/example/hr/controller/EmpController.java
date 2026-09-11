@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.hr.dto.EmpDto;
 import com.example.hr.service.EmpService;
 
 // templates : 경로의 파일은 컨트롤러를 통해서만
@@ -24,10 +25,21 @@ public class EmpController {
 		return "/index";
 	}
 	
+	/*
+	 * 사원 상세화면
+	 * 사번을 이용해서 사원정보를 조회 후 화면에 전달
+	 */
 	@GetMapping("/emp-detail")
-	public void empDetail(@RequestParam(value = "empId", defaultValue = "") String empId) {
+	public void empDetail(@RequestParam(value = "empId", defaultValue = "") String empId
+							, Model model) {
 		System.out.println("empId : " + empId);
+		// log.info("empId" + empId)
 		
+		EmpDto emp = service.selectById(empId);
+		model.addAttribute("emp", emp);
+				
 	}
+	
+	
 	
 }

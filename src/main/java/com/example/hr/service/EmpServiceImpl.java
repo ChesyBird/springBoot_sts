@@ -40,5 +40,10 @@ public class EmpServiceImpl implements EmpService {
 		model.addAttribute("list", list);
 		model.addAttribute("totalCnt", totalCnt);
 	}
+
+	@Override
+	public EmpDto selectById(String empId) {
+		return mapper.selectById(empId); // 화면에서 전달받은 empId
+	}
 	
 }
