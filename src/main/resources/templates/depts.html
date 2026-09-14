@@ -14,15 +14,15 @@
   <!-- 공통 메뉴 — templates/hr/_menu.html 참고 (Thymeleaf 전환 시 fragment 로) -->
   <header class="site-header">
     <div class="site-header__inner container container--wide">
-      <a class="site-header__brand" href="index.html">👔 사원관리</a>
+      <a class="site-header__brand" href="/index">👔 사원관리</a>
       <nav class="site-nav hide-mobile" aria-label="주요 메뉴">
-        <a href="index.html">사원 목록</a>
-        <a href="depts.html" aria-current="page">부서</a>
-        <a href="dashboard.html">대시보드</a>
+        <a href="/index">사원 목록</a>
+        <a href="/depts" aria-current="page">부서</a>
+        <a href="/dashboard">대시보드</a>
       </nav>
       <span class="spacer"></span>
       <button class="btn btn--ghost btn--sm" type="button" data-theme-toggle aria-label="다크 모드 전환">🌓</button>
-      <a class="btn btn--primary btn--sm" href="login.html">로그인</a>
+      <a class="btn btn--primary btn--sm" href="/login">로그인</a>
     </div>
   </header>
 
@@ -30,7 +30,7 @@
     <div class="page-head">
       <div>
         <h1>부서</h1>
-        <p>전체 9개 부서</p>
+        <p>전체 [[${totalCnt}]]개 부서</p>
       </div>
       <button class="btn btn--primary" type="button" data-modal-open="dept-modal">+ 부서 추가</button>
     </div>
@@ -41,15 +41,10 @@
           <tr><th>코드</th><th>부서명</th><th>근무지</th><th>인원</th><th>평균 급여</th><th>관리</th></tr>
         </thead>
         <tbody>
-          <tr><td>D1</td><td>인사관리부</td><td>서울</td><td>3명</td><td>2,606,000원</td><td class="row-actions"><a href="#">수정</a></td></tr>
-          <tr><td>D2</td><td>회계관리부</td><td>서울</td><td>3명</td><td>2,280,000원</td><td class="row-actions"><a href="#">수정</a></td></tr>
-          <tr><td>D3</td><td>마케팅부</td><td>서울</td><td>0명</td><td>-</td><td class="row-actions"><a href="#">수정</a></td></tr>
-          <tr><td>D4</td><td>국내영업부</td><td>서울</td><td>0명</td><td>-</td><td class="row-actions"><a href="#">수정</a></td></tr>
-          <tr><td>D5</td><td>해외영업1부</td><td>일본</td><td>5명</td><td>2,752,000원</td><td class="row-actions"><a href="#">수정</a></td></tr>
-          <tr><td>D6</td><td>해외영업2부</td><td>중국</td><td>2명</td><td>3,650,000원</td><td class="row-actions"><a href="#">수정</a></td></tr>
-          <tr><td>D7</td><td>해외영업3부</td><td>미국</td><td>0명</td><td>-</td><td class="row-actions"><a href="#">수정</a></td></tr>
-          <tr><td>D8</td><td>기술지원부</td><td>러시아</td><td>3명</td><td>2,328,000원</td><td class="row-actions"><a href="#">수정</a></td></tr>
-          <tr><td>D9</td><td>총무부</td><td>서울</td><td>3명</td><td>5,900,000원</td><td class="row-actions"><a href="#">수정</a></td></tr>
+          <tr th:each="depts : ${list}">
+			<td th:text="${depts.deptId}">D1</td><td th:text="${depts.deptTitle}">인사관리부</td><td th:text="${depts.nationalName}">서울</td><td th:text="${depts.cnt}">3명</td><td th:text="${depts.avg}">2,606,000원</td><td class="row-actions"><a href="#">수정</a></td>
+		  </tr>
+          
         </tbody>
       </table>
     </div>
