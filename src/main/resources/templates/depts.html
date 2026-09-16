@@ -11,6 +11,25 @@
   <script src="js/component.js" defer></script>
 </head>
 <body>
+	
+<script th:inline = "javascript">
+	// 타임리프 데이터가 없는 경우 null이 입력됨
+	const error = [[${error}]];
+	const msg = [[${msg}]];
+	
+	if(msg){
+		// 메세지 출력
+		alert(msg);
+	} 
+	// 에러메세지 출력 후 롤백
+	if(error) {
+		alert(error);
+		history.back();
+	}
+	
+	
+</script>
+
   <!-- 공통 메뉴 — templates/hr/_menu.html 참고 (Thymeleaf 전환 시 fragment 로) -->
   <header class="site-header">
     <div class="site-header__inner container container--wide">
@@ -42,7 +61,9 @@
         </thead>
         <tbody>
           <tr th:each="depts : ${list}">
-			<td th:text="${depts.deptId}">D1</td><td th:text="${depts.deptTitle}">인사관리부</td><td th:text="${depts.nationalName}">서울</td><td th:text="${depts.cnt}">3명</td><td th:text="${depts.avg}">2,606,000원</td><td class="row-actions"><a href="#">수정</a></td>
+			<td th:text="${depts.deptId}">D1</td><td th:text="${depts.deptTitle}">인사관리부</td>
+			<td th:text="${depts.nationalName}">서울</td><td th:text="|${depts.cnt == 0 ? '-' : depts.cnt+'명'}|">3명</td>
+			<td th:text="|${depts.avg == 0.0 ? '-' : #numbers.formatInteger(depts.avg, 3, 'COMMA')+'원'}|">2,606,000원</td><td class="row-actions"><a href="#">수정</a></td>
 		  </tr>
           
         </tbody>
@@ -63,10 +84,10 @@
     <div class="modal__panel" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="dept-modal-title" style="width: min(440px, 100%)">
       <button class="modal__close" type="button" data-modal-close aria-label="닫기">×</button>
       <h3 class="modal__title" id="dept-modal-title">부서 추가</h3>
-      <form class="modal__body stack" style="--gap: var(--space-4)" data-dept-form>
+      <form name="saveForm" action="/saveDept" method="post" class="modal__body stack" style="--gap: var(--space-4)" data-dept-form>
         <div class="field">
           <label class="label" for="d-code">부서 코드 *</label>
-          <input class="input" id="d-code" placeholder="D10" required>
+          <input class="input" id="d-code" placeholder="D10" required name="deptId">
         </div>
         <div class="field">
           <label class="label" for="d-name">부서명 *</label>
@@ -75,12 +96,20 @@
         <div class="field">
           <label class="label" for="d-loc">근무지</label>
           <select class="select" id="d-loc">
-            <option>서울</option><option>일본</option><option>중국</option><option>미국</option><option>러시아</option>
+            <option value="L1">한국</option>
+			<option value="L2">일본</option>
+			<option value="L3">중국</option>
+			<option value="L4">미국</option>
+			<option value="L5">러시아</option>
           </select>
         </div>
       </form>
       <div class="modal__footer">
         <button class="btn btn--secondary" type="button" data-modal-close>취소</button>
+		<!-- 서브밋 버튼 만들기
+			1. type을 submit으로
+			2. 자바스크립트를 활용
+		-->
         <button class="btn btn--primary" type="button" id="dept-save">추가</button>
       </div>
     </div>
@@ -89,8 +118,10 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("dept-save").addEventListener("click", function () {
-        UI.modal.close("dept-modal");
-        UI.toast("부서가 추가되었습니다. (프로토타입)", { type: "success" });
+        //UI.modal.close("dept-modal");
+        //UI.toast("부서가 추가되었습니다. (프로토타입)", { type: "success" });
+		// 폼에 있는 name 속성이 있는 요소를 가지고 서버로 전송
+		saveForm.submit();
       });
     });
   </script>

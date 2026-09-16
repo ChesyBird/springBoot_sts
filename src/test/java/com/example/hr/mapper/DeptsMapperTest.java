@@ -33,4 +33,22 @@ public class DeptsMapperTest {
 		assertEquals(9, list.size());
 	}
 	
+	@Test
+	public void saveDept() {
+		DeptsDto dto = new DeptsDto();
+		dto.setDeptId("A4");
+		dto.setDeptTitle("신규사업부");
+		dto.setLocationId("L2");
+		
+		int res = mapper.saveDept(dto);
+		assertEquals(1, res);
+		
+		if(res > 0) {
+			System.out.println("등록 되었습니다.");
+		} else {
+			System.out.println("등록 실패");
+		}
+		
+	}
+	
 }

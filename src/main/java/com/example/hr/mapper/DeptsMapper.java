@@ -2,6 +2,7 @@ package com.example.hr.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,4 +16,6 @@ public interface DeptsMapper {
 	
 	public List<DeptsDto> selectAll();
 	
+	@Insert("insert into dept values (#{deptId}, #{deptTitle}, #{locationId})")
+	public int saveDept(DeptsDto dept);
 }

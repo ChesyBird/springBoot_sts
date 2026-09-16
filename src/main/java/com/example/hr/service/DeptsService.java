@@ -11,4 +11,6 @@ public interface DeptsService {
 	
 	public List<DeptsDto> selectAll();
 	
+	public int saveDept(DeptsDto dept);
+	
 }
