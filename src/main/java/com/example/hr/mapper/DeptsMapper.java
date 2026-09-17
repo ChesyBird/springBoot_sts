@@ -18,4 +18,7 @@ public interface DeptsMapper {
 	
 	@Insert("insert into dept values (#{deptId}, #{deptTitle}, #{locationId})")
 	public int saveDept(DeptsDto dept);
+	
+	@Insert("delete from dept where dept_id={deptId}")
+	public int deleteDept(String deptId);
 }

@@ -51,4 +51,16 @@ public class DeptsMapperTest {
 		
 	}
 	
+	@Test
+	public void deleteDept() {
+		int res = mapper.deleteDept("A1");
+		assertEquals(1, res);
+		
+		if(res > 0) {
+			System.out.println("삭제 되었습니다.");
+		} else {
+			System.out.println("삭제 실패");
+		}
+	}
+	
 }

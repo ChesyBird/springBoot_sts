@@ -10,4 +10,6 @@ public interface EmpService {
 	void selectByCond(Model model);
 	
 	EmpDto selectById(String empId);
+	
+	EmpDto login(String id, String pw) throws Exception;
 }

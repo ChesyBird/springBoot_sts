@@ -1,6 +1,7 @@
 package com.example.hr.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
@@ -48,6 +49,15 @@ public class EmpMapperTest {
 		EmpDto emp = mapper.selectById("200");
 		System.out.println(emp);
 		
+		assertNull(emp);
+	}
+	
+	@Test
+	public void selectByUserId() { 
+		EmpDto emp = mapper.selectByUserId("200");
+		System.out.println(emp);
+		
+		assertNull(emp);
 	}
 	
 }

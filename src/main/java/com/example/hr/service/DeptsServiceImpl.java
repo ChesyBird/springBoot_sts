@@ -32,4 +32,9 @@ public class DeptsServiceImpl implements DeptsService {
 		return mapper.saveDept(dept);
 	}
 
+	@Override
+	public int deleteDept(String deptId) {
+		return mapper.deleteDept(deptId);
+	}
+
 }

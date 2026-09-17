@@ -13,4 +13,6 @@ public interface DeptsService {
 	
 	public int saveDept(DeptsDto dept);
 	
+	public int deleteDept(String deptId);
+	
 }

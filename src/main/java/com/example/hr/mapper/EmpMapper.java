@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.hr.dto.EmpDto;
 
@@ -23,6 +24,16 @@ public interface EmpMapper {
 	@Select("select * from emp where emp_id=#{id}")
 	public EmpDto selectById(String id);
 	
+	@Select("select * from emp where id=#{id}")
+	public EmpDto selectByUserId(String id);
 	
+	@Update("update emp set login_fail_count=login_fail_count+1 where id=#{id}")
+	public int updateFailCnt(String id);
+	
+	@Update("update emp set login_locked=1 where id=#{id}")
+	public int lockUserAccount(String id);
+	
+	@Update("update emp set login_fail_count=0 where id=#{id}")
+	public int resetFailCnt(String id);
 	
 }
