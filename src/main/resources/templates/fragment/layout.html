@@ -1,0 +1,34 @@
+<html>
+	<body>
+		<!-- 공통 메뉴 — templates/hr/_menu.html 참고 (Thymeleaf 전환 시 fragment 로) -->
+		<!-- 공통으로 사용되는 영역을 fragment로 등록 -->
+	  <header class="site-header" th:fragment="header">
+	    <div class="site-header__inner container container--wide">
+	      <a class="site-header__brand" href="/">👔 사원관리</a>
+	      <nav class="site-nav hide-mobile" aria-label="주요 메뉴">
+	        <a href="/" aria-current="page">사원 목록</a>
+	        <a href="/depts">부서</a>
+	        <a href="/dashboard">대시보드</a>
+	      </nav>
+	      <span class="spacer"></span>
+	      <button class="btn btn--ghost btn--sm" type="button" data-theme-toggle aria-label="다크 모드 전환">🌓</button>
+	      
+	      <span th:if=${session.user!=null}>
+	      	[[${session.user?.empName}]]님 환영합니다!
+	      </span>
+	      
+	      <a class="btn btn--primary btn--sm" href="/login" th:if="${session.user == null}">로그인</a>
+	      <a class="btn btn--primary btn--sm" href="/logout" th:if="${session.user != null}">로그아웃</a>
+	    </div>
+	  </header>
+	  
+  <footer class="site-footer" th:fragment="footer">
+    <div class="container container--wide row row--between">
+      <p>👔 사원관리 · 학습용 프로토타입</p>
+      <span class="muted" style="font-size: var(--text-sm)">디자인 시스템: /css/basic.css</span>
+    </div>
+  </footer>
+  
+  
+	</body>
+</html>

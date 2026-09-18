@@ -11,20 +11,7 @@
   <script src="js/component.js" defer></script>
 </head>
 <body>
-  <!-- 공통 메뉴 — templates/hr/_menu.html 참고 (Thymeleaf 전환 시 fragment 로) -->
-  <header class="site-header">
-    <div class="site-header__inner container container--wide">
-      <a class="site-header__brand" href="index.html">👔 사원관리</a>
-      <nav class="site-nav hide-mobile" aria-label="주요 메뉴">
-        <a href="index.html" aria-current="page">사원 목록</a>
-        <a href="depts.html">부서</a>
-        <a href="dashboard.html">대시보드</a>
-      </nav>
-      <span class="spacer"></span>
-      <button class="btn btn--ghost btn--sm" type="button" data-theme-toggle aria-label="다크 모드 전환">🌓</button>
-      <a class="btn btn--primary btn--sm" href="login.html">로그인</a>
-    </div>
-  </header>
+<header th:replace="~{./fragment/layout.html :: header}"></header>
 
   <main class="app-main container">
     <nav class="breadcrumb mb-4" aria-label="현재 위치">
@@ -126,7 +113,7 @@
     </form>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" th:replace="~{./fragment/layout.html :: footer}">
     <div class="container container--wide row row--between">
       <p>👔 사원관리 · 학습용 프로토타입</p>
       <span class="muted" style="font-size: var(--text-sm)">디자인 시스템: /css/basic.css</span>

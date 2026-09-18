@@ -12,4 +12,6 @@ public interface EmpService {
 	EmpDto selectById(String empId);
 	
 	EmpDto login(String id, String pw) throws Exception;
+	
+	int updateFailCnt(String id);
 }

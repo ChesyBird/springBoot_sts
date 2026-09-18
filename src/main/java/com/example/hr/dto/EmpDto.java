@@ -18,8 +18,8 @@ public class EmpDto {
 	private String id;
 	private String pw;
 	// 계정 잠금 여부(0: 정상/ 1: 잠금)
-	private int is_locked;
-	private int login_fail_count;
+	private int isLocked;
+	private int loginFailCount;
 	
 	// entYn : 퇴직여부(N: 재직 / Y: 퇴사)
 	private String entYn;

@@ -13,6 +13,7 @@
 <body>
 	
 <script th:inline = "javascript">
+
 	// /*[[${변수}]]*/'기본값 입력'
 	// 타임리프 데이터가 없는 경우 null이 입력됨
 	const error = /*[[${error}]]*/ '';
@@ -31,21 +32,9 @@
 	
 </script>
 
-  <!-- 공통 메뉴 — templates/hr/_menu.html 참고 (Thymeleaf 전환 시 fragment 로) -->
-  <header class="site-header">
-    <div class="site-header__inner container container--wide">
-      <a class="site-header__brand" href="/index">👔 사원관리</a>
-      <nav class="site-nav hide-mobile" aria-label="주요 메뉴">
-        <a href="/index">사원 목록</a>
-        <a href="/depts" aria-current="page">부서</a>
-        <a href="/dashboard">대시보드</a>
-      </nav>
-      <span class="spacer"></span>
-      <button class="btn btn--ghost btn--sm" type="button" data-theme-toggle aria-label="다크 모드 전환">🌓</button>
-      <a class="btn btn--primary btn--sm" href="/login">로그인</a>
-	  <!-- [[${session.loginId}]] -->
-    </div>
-  </header>
+	<!-- 바꿔야 할 부분이 많은 경우 기본으로 있는 헤더 안에 th:replace 붙여줘도 괜찮다!
+	바꿀부분 드래그 후 ctrl+h -> replace -->
+<header th:replace="~{./fragment/layout.html :: header}"></header>
 
   <main class="app-main container container--wide">
     <div class="page-head">
@@ -74,7 +63,7 @@
     </div>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" th:replace="~{./fragment/layout.html :: footer}">
     <div class="container container--wide row row--between">
       <p>👔 사원관리 · 학습용 프로토타입</p>
       <span class="muted" style="font-size: var(--text-sm)">디자인 시스템: /css/basic.css</span>

@@ -56,24 +56,16 @@ public class EmpServiceImpl implements EmpService {
 			throw new Exception("존재하지 않는 아이디입니다.");
 		}
 		
+		System.out.println("lock : " + emp.getIsLocked());
 		// 3. 잠긴 계정인지 확인 -> 잠겼으면 메세지 처리
-		if(emp.getIs_locked() == 1) {
+		if(emp.getIsLocked() == 1) {
 			throw new Exception("잠긴 계정입니다. 관리자에게 문의해주세요.");
 		}
-		
 		// 4. 비밀번호 일치 확인 -> 일치하지 않으면 실패 카운팅 후 메세지 처리
+		// -> 예외가 발생되면 >>롤백<<이 되어버림
+		// -> 컨트롤러에서 로그인 실패 시 메서드를 다시 호출하도록 바꾸기 
 		if(!emp.getPw().equals(pw)) {
-			// 실패 카운트
-			mapper.updateFailCnt(id);
-			
-			// 5회 초과시 계정 잠금
-			if(emp.getLogin_fail_count()+1 > 5) {
-				mapper.lockUserAccount(id);
-				throw new Exception("5회 실패로 계정이 잠겼습니다.");
-			}
-
 			throw new Exception("비밀번호가 일치하지 않습니다.");
-			
 		}
 		
 		// 5. 로그인 성공 -> empDto 반환
@@ -81,6 +73,30 @@ public class EmpServiceImpl implements EmpService {
 		mapper.resetFailCnt(id);
 		
 		return emp;
+	}
+	
+	public String failCntUpdate(String id) {
+		/*
+		if(!emp.getPw().equals(pw)) {
+			// 실패 카운트
+			mapper.updateFailCnt(id);
+			
+			// 5회 초과시 계정 잠금
+			if(emp.getLoginFailCount()+1 > 5) {
+				mapper.lockUserAccount(id);
+				throw new Exception("5회 실패로 계정이 잠겼습니다.");
+			}
+
+			throw new Exception("비밀번호가 일치하지 않습니다.");
+			
+		} */
+		return "";
+	}
+
+	@Override
+	public int updateFailCnt(String id) {
+		
+		return mapper.updateFailCnt(id);
 	}
 	
 }

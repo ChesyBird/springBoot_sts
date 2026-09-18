@@ -29,9 +29,9 @@
       </div>
 
       <!-- 로그인 실패 시 서버가 이 배너를 렌더링 (예시로 표시해 둠) -->
-      <div class="alert alert--danger" role="alert">
+      <div class="alert alert--danger" role="alert" th:if="${error != null}">
         <span class="alert__icon" aria-hidden="true">!</span>
-        <div class="alert__body">아이디 또는 비밀번호가 올바르지 않습니다.</div>
+        <div class="alert__body" th:text=${error}>아이디 또는 비밀번호가 올바르지 않습니다.</div>
       </div>
 
       <form class="stack" style="--gap: var(--space-4)" action="/login" method="post" data-login-form>
